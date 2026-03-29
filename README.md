@@ -3,7 +3,7 @@
 </p> 
 <h1 align="center">I T E R A T O R</h1> 
 
-*note that the readme is serving useful links rn*
+*note that the readme is serving useful links rn, currently planning layout and collecting assets and making a general plan*
 
 **Useful info**
 
