@@ -11,5 +11,7 @@
   <li><a href="https://fontstruct.com/fontstructions/show/2699483/rain-world-alphabet-1" target="_blank" rel="noopener">rain world alphabet</a></li>
   <li><a href="https://docs.google.com/spreadsheets/d/17vjtkcWiXpcLOKpD0kqZZQGLcyylol_OotzbQ1JJ63A/edit?gid=0#gid=0" target="_blank" rel="noopener">emojis to glyphs</a></li>
   <li><a href="https://candlesign.github.io/Rain-World-Devlog/Full%20devlog" target="_blank" rel="noopener">rain world devlog</a></li>
+  <li><a href="https://github.com/cookiecaker/Rain-World-Sounds" target="_blank" rel="noopener">Rain world sounds</a></li>
+
 </ul>
 
