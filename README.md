@@ -15,3 +15,11 @@
   <li><a href="https://rainworld.miraheze.org/wiki/Music" target="_blank" rel="noopener">Rain world music</a></li>
 </ul>
 
+**Image manipulation**
+
+<ul>
+  <li><a href="https://rainworld.miraheze.org/wiki/Music" target="_blank" rel="noopener">Replace a color in image with another based on tolerance</a></li>
+  <li><a href="https://www.iloveimg.com/crop-image" target="_blank" rel="noopener">Crop an image</a></li>
+  <li><a href="https://redketchup.io/color-picker" target="_blank" rel="noopener">Select a color in an image</a></li>
+</ul>
+
