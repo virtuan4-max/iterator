@@ -1,0 +1,248 @@
+/*==fonts==*/
+@font-face {
+    font-family: "Runes";
+    src: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/fonts/rain-world-alphabet.woff2") format("woff2");
+
+    ascent-override: 100%;
+    descent-override: 0%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: "Rodondo";
+    src: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/fonts/Rodondo.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Menu";
+    src: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/fonts/menu-font.woff2") format("woff2");
+    ascent-override: 70%;
+    descent-override: 0%;
+    line-gap-override: 0%;
+}
+
+/*animations*/
+@keyframes pulseglyph {
+    0% {transform: translate(-50%, -50%) scale(1);}
+    50% {transform: translate(-50%, -50%) scale(1.02);}
+    100% {transform: translate(-50%, -50%) scale(1);}
+}
+@keyframes flash {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+}
+/*main ahh*/
+:root {
+    --accent: #C40039;
+    --bg:#000000;
+    --text:#FFFFFF;
+    --idlemenu:#A9A4B2;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg);
+    position: relative;
+}
+
+/*intro*/
+#intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 2rem;
+    user-select: none;
+    pointer-events: none;
+}
+#title {
+    font-family: "Runes";
+    font-size: clamp(2rem, 6vw, 5rem);
+    color: var(--accent);
+    text-align: center;
+    opacity: 0;
+}
+#subtitle {
+    font-family: "Menu";
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--text);
+    text-align: center;
+    opacity: 0;
+}
+#introclick {
+    position: absolute;
+    inset: 0;
+    margin: auto; 
+    width: fit-content;
+    height: fit-content;
+    width: 100%;
+    text-align: center;
+    font-family: "Menu";
+    color: var(--text);
+    opacity: 1;
+    transition: opacity 1s ease;
+    pointer-events: none;
+    user-select: none;
+
+}
+#introclick.fade {opacity: 0;}
+
+/*main content*/
+#maincontent {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+.centerimage img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#centerrings{
+    width: 20%;  
+}
+#centerglyph{
+    width: 10%;  
+    animation: pulseglyph 5s ease-in-out infinite;
+}
+/*buttons*/
+.circlebutton {
+    position: absolute;
+    width: 2.61vw;
+    height: 5.47vh;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+}
+
+.outercircle {
+    width: 100%;
+    transition: transform 0.15s linear, filter 0.15s linear;
+    position: relative;
+}
+
+.innercircle {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;
+
+}
+.rectbutton {
+    position: absolute;
+    width: 8.05vw;
+    height: 4.81vh;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+}
+
+.outerrect {
+    width: 78%;
+    height: 100%;
+    transition: transform 0.15s linear, filter 0.15s linear;
+    position: relative;
+}
+
+.innerrect {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;
+
+}
+.buttonlabel {
+    font-family: "Menu";
+    color: var(--text);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    font-size: 1.1rem;
+}
+
+
+
+/*this circlebutton was a nightmare to animate and center etc so appreciate it it does all the fancy animation stuff and like yeah but it looks good kinda😭✌️*/
+
+#plusbutton {
+    width: 50%;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+#addpearl:hover #pearlou{
+    transform: scale(1.45);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#addpearl:hover #pearlin{
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+#addpearl:hover #plusbutton{
+    filter: brightness(0) invert(1);    
+}
+#gearbutton {
+    width: 50%;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+#settings:hover #gearou{
+    transform: scale(1.45);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#settings:hover #gearin{
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+#settings:hover #gearbutton{
+    filter: brightness(0) invert(1);    
+}
+
+/*settings modal*/
+#back:hover #backou{
+    transform: scale(1.45);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#back:hover #backin{
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+#settingsborder {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 36.6vw;
+    height: 87.5vh;
+
+}
