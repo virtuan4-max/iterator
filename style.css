@@ -113,7 +113,7 @@ body {
 .circlebutton {
     position: absolute;
     width: 2.61vw;
-    height: 5.47vh;
+    height: 2.61vw;
     border: none;
     background: none;
     cursor: pointer;
@@ -140,7 +140,7 @@ body {
 .rectbutton {
     position: absolute;
     width: 8.05vw;
-    height: 4.81vh;
+    height: 2.28vw;
     border: none;
     background: none;
     cursor: pointer;
@@ -165,6 +165,7 @@ body {
     opacity: 0;
 
 }
+
 .buttonlabel {
     font-family: "Menu";
     color: var(--text);
@@ -185,7 +186,7 @@ body {
 #plusbutton {
     width: 50%;
     position: absolute;
-    top: 48%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
@@ -206,12 +207,11 @@ body {
 #gearbutton {
     width: 50%;
     position: absolute;
-    top: 48%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
 }
-
 #settings:hover #gearou{
     transform: scale(1.45);
     filter: brightness(0) invert(1);
@@ -227,6 +227,11 @@ body {
 }
 
 /*settings modal*/
+#back {
+    position: absolute;
+    bottom: 4.5%;
+    right: 3.5%;
+}
 #back:hover #backou{
     transform: scale(1.45);
     filter: brightness(0) invert(1);
@@ -244,5 +249,75 @@ body {
     transform: translate(-50%, -50%);
     width: 36.6vw;
     height: 87.5vh;
+    background-image: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectborder.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#introyn {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+}
+#introyn:hover #introynou{
+    transform: scale(1.45);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;    
+}
+#introyn:hover #introynin{
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    animation: flash 0.4s infinite;     
+}
+#introyncheck{
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+#introyn:hover #introyncheck{
+    filter: brightness(0) invert(1);
+    opacity: 1;  
+}
 
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 70%;
+  background: transparent;
+
+}
+
+/* WebKit browsers (Chrome, Safari, Edge, Opera) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 30px;
+  width: 30px;
+  background: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/audiosliderfull.png') no-repeat center;
+  background-size: contain;
+  cursor: pointer;
+  margin-top: -10px; 
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  background: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/audiobar.png') no-repeat center;
+  background-size: contain;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;    
+}
+#audiotoggle {
+    position:absolute;
+    top: 69.8%;
+    left: 20%;
+}
+#musictoggle {
+    position:absolute;
+    top: 77.8%;
+    left: 20%;    
 }
