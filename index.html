@@ -32,146 +32,24 @@
         </button>
     </div>
 
-    <div class="settingsmodal">
-        <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectborder.png" id="settingsborder" draggable="false" ondragstart="return false;">
-        <button class="rectbutton" style=" bottom: 10%; right: 33%;" id="back">
+    <div class="settingsmodal" id="settingsborder" draggable="false" ondragstart="return false;">
+        <button class="rectbutton" id="back">
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backou" draggable="false" ondragstart="return false;">
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backin" draggable="false" ondragstart="return false;">
             <span class="buttonlabel">BACK</span>
         </button>
-
+        <button class="circlebutton" id="introyn">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="outercircle" id="introynou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="innercircle" id="introynin" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/check.png" id="introyncheck">
+            <span class="buttonlabel" style="top: 50%; left: -100%;">INTRO?</span>
+        </button>
+        <input type="range" id="audiotoggle">
+        <input type="range" id="musictoggle">
+        <span class="buttonlabel" style="top: 70.8%; left: 12.8%;">AUDIO</span>
+        <span class="buttonlabel" style="top: 78.8%; left: 12.8%;">MUSIC</span>
     </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
-<script>
-    // --- Audio ---
-    const rain = new Audio('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/audio/rain.wav');
-    const enterclick = new Audio('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/audio/UI_UIArp.wav');
-    const clickhigh = new Audio('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/audio/UI_UIMetal1.wav');
-    const randomgods = new Audio('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/audio/NA_41_-_Random_Gods_(Theme_III).mp3');
-
-    rain.loop = true;
-    rain.volume = 0;
-    randomgods.loop = true;
-
-    const title = document.getElementById('title');
-    const subtitle = document.getElementById('subtitle');
-    const intro = document.getElementById('intro');
-    const introclick = document.getElementById('introclick');
-    const settingsbutton = document.getElementById('settings');
-
-    const settingsmodal = document.querySelector('.settingsmodal');
-    const maincontent = document.querySelector('.maincontent');
-
-
-    document.addEventListener("keydown", handlekeypress);
-
-    let settingsmodalon = false
-    maincontent.style.display = 'none';
-    settingsmodal.style.display = 'none'
-    let introPlayed = false;
-
-    document.addEventListener('click', (e) => {
-        //buttons making clicky noises
-        if (e.target.closest('.circlebutton')) {
-            clickhigh.currentTime = 0;
-            clickhigh.play()
-        }
-        if (e.target.closest('.rectbutton')) {
-            clickhigh.currentTime = 0;
-            clickhigh.play()
-        }
-        if(e.target.closest('#settings')) {
-            settingsmodalon = true;
-            maincontent.style.display = 'none';
-            settingsmodal.style.display = 'block';      
-        }
-        if (e.target.closest('#back')) {
-            settingsmodalon = false;
-            maincontent.style.display = 'block';
-            settingsmodal.style.display = 'none';
-        }
-        if(e.target.closest('.centerimage')) {
-            clickhigh.currentTime = 0;
-            clickhigh.play();         
-        }
-
-        if (!introPlayed) {
-            introPlayed = true;
-            enterclick.play();
-            enterclick.volume=0.5;
-        
-            introclick.classList.add('fade');
-            introclick.addEventListener('transitionend', () => introclick.remove());
-            rain.play().then(introSequence);
-        }
-    });
-
-    function handlekeypress(event) {
-        const key = event.key;
-        if (key.toLowerCase() === "s") {
-            rain.pause();
-            enterMainContent();
-        }
-    }
-    function fadeVolume(audio, from, to, duration, onDone) {
-        const steps = 60;
-        const interval = duration / steps;
-        const delta = (to - from) / steps;
-        let current = from;
-        let count = 0;
-
-        const id = setInterval(() => {
-            count++;
-            current += delta;
-            audio.volume = Math.min(Math.max(current, 0), 1);
-            if (count >= steps) {
-                clearInterval(id);
-                audio.volume = to;
-                if (onDone) onDone();
-            }
-        }, interval);
-    }
-    function enterMainContent() {
-        intro.remove();
-        if (maincontent) {
-            maincontent.style.opacity = '0';
-            maincontent.style.visibility = 'visible';
-            maincontent.style.display = 'block';
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => { // <-- second rAF added
-                    maincontent.style.transition = 'opacity 3s ease';
-                    maincontent.style.opacity = '1';
-                });
-            });
-        }
-        randomgods.volume = 0;
-        randomgods.play();
-        fadeVolume(rain,1,0,3000, () => rain.pause());
-        fadeVolume(randomgods,0,0.08,3000);
-    }
-
-    function introSequence() {
-        fadeVolume(rain,0,1,2500, () => {
-            title.style.transition = 'opacity 3s ease';
-            title.style.opacity = '1';
-
-            setTimeout(() => {
-                subtitle.style.transition = 'opacity 3s ease';
-                subtitle.style.opacity = '1';
-
-                setTimeout(() => {
-                    title.style.transition = 'opacity 3s ease';
-                    subtitle.style.transition = 'opacity 3s ease';
-                    title.style.opacity = '0';
-                    subtitle.style.opacity = '0';
-
-                    setTimeout(enterMainContent, 3000);
-                }, 6000);
-            }, 3000);
-        });
-    }
-
-
-
-</script>
