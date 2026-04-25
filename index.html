@@ -17,7 +17,7 @@
     <div class="maincontent">
         <div class="centerimage">
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/centerimage-noglyph.png" id="centerrings" draggable="false" ondragstart="return false;">
-            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/logo.png" id="centerglyph" draggable="false" ondragstart="return false;">
+            <span id="centerglyph" draggable="false" ondragstart="return false;">🧓</span>
         </div>
 
         <button class="circlebutton" style="top: 2.19%; right: 6.27%;" id="addpearl">
@@ -30,13 +30,18 @@
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="innercircle" id="gearin" draggable="false" ondragstart="return false;">
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/gear.png" id="gearbutton">
         </button>
+        <button class="rectbutton" id="backcat">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backcou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backcin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel" style="color: var(--idlemenu);">BACK</span>
+        </button>
     </div>
 
     <div class="settingsmodal" id="settingsborder" draggable="false" ondragstart="return false;">
-        <button class="rectbutton" id="back">
+        <button class="rectbutton" id="back" style=" bottom: 4.5%; right: 3.5%;">
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backou" draggable="false" ondragstart="return false;">
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backin" draggable="false" ondragstart="return false;">
-            <span class="buttonlabel">BACK</span>
+            <span class="buttonlabel" style="color: var(--idlemenu);">BACK</span>
         </button>
         <button class="circlebutton" id="introyn">
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="outercircle" id="introynou" draggable="false" ondragstart="return false;">
@@ -49,7 +54,45 @@
         <span class="buttonlabel" style="top: 70.8%; left: 12.8%;">AUDIO</span>
         <span class="buttonlabel" style="top: 78.8%; left: 12.8%;">MUSIC</span>
     </div>
-    
+
+    <div class="addpearlmodal" id = "addpearlborder" draggable="false" ondragstart="return false;">
+        <button class="rectbutton" id="back" style = " bottom: 4.5%; left: 3.5%;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel" style="color: var(--idlemenu);">BACK</span>
+        </button>
+        <button class="rectbutton" id="addbutton" style = "bottom: 4.5%; right: 3.5%;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="addou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="addin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel" style="color: var(--idlemenu);">ADD</span>
+        </button>
+        <button class="rectbutton" id="selper">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/recthalfrr.png" class="outerrect" id="addou" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel" style="color: var(--idlemenu);">PEARL</span>
+        </button>   
+        <button class="rectbutton" id="selcat">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/recthalffr.png" class="outerrect" id="addou" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel" style="color: var(--idlemenu);">CATEGORY</span>
+        </button>           
+
+        <input type="text" id="pearlnameinput" placeholder="enter name" maxlength="30">   
+        <span class="buttonlabel" id="nameinputlabel">NAME:</span>
+
+        <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" style="position: absolute; top: 45%; right: 38%; width: 10vw; height: 10vw; transform: translate(50%, -50%)">
+        <div class="selectedpearl">
+            <input type="color" class="colorinput" id="pearlcolorinput" value="#929292">
+            <span class="buttonlabel" id="pearllabel">COLOR</span>            
+            <input type="color" class="colorinput" id="crosscolorinput" value="#FFFFFF">
+            <span class="buttonlabel" id="crosslabel">CROSS</span>
+            <div id="pearlimage"></div>
+        </div>
+        <div class="selectedcat">
+            <input type="color" class="colorinput" id="catcolorinput" value="#C40039">
+            <span class="buttonlabel" id="categorylabel">COLOR</span>
+            <span id="categorypreview">D</span>                 
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
