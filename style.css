@@ -6,6 +6,8 @@
     ascent-override: 100%;
     descent-override: 0%;
     line-gap-override: 0%;
+    letter-spacing: -20px;
+
 }
 @font-face {
     font-family: "Rodondo";
@@ -18,13 +20,12 @@
     descent-override: 0%;
     line-gap-override: 0%;
 }
+@font-face {
+    font-family: "textinput";
+    src: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/fonts/menu-font.woff2") format("woff2");
+}
 
 /*animations*/
-@keyframes pulseglyph {
-    0% {transform: translate(-50%, -50%) scale(1);}
-    50% {transform: translate(-50%, -50%) scale(1.02);}
-    100% {transform: translate(-50%, -50%) scale(1);}
-}
 @keyframes flash {
     0%   { opacity: 1; }
     50%  { opacity: 0; }
@@ -36,6 +37,7 @@
     --bg:#000000;
     --text:#FFFFFF;
     --idlemenu:#A9A4B2;
+    --widthradial: 50%;
 }
 
 body {
@@ -54,7 +56,7 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
-    gap: 2rem;
+    gap: 1.6667vw;
     user-select: none;
     pointer-events: none;
 }
@@ -91,23 +93,32 @@ body {
 #introclick.fade {opacity: 0;}
 
 /*main content*/
-#maincontent {
+.maincontent {
     opacity: 0;
     visibility: hidden;
     display: none;
 }
-.centerimage img{
+
+#centerrings{
+    width: 20%;  
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#centerrings{
-    width: 20%;  
-}
 #centerglyph{
-    width: 10%;  
-    animation: pulseglyph 5s ease-in-out infinite;
+    position: absolute;
+    text-align: center;
+    font-family: Runes;
+    color: var(--accent);
+    font-size: 8vw;  
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: -2vw;
+    user-select: none; 
+    cursor: pointer;
+
 }
 /*buttons*/
 .circlebutton {
@@ -176,7 +187,7 @@ body {
     z-index: 1;
     pointer-events: none;
     user-select: none;
-    font-size: 1.1rem;
+    font-size: 0.917vw;
 }
 
 
@@ -229,16 +240,16 @@ body {
 /*settings modal*/
 #back {
     position: absolute;
-    bottom: 4.5%;
-    right: 3.5%;
+
+}
+#back:hover {
+    filter: brightness(0) invert(1);
 }
 #back:hover #backou{
     transform: scale(1.45);
-    filter: brightness(0) invert(1);
     transition: transform 0.08s ease-out, filter 0.08s ease-out;
 }
 #back:hover #backin{
-    filter: brightness(0) invert(1);
     opacity: 1;
     animation: flash 0.4s infinite; 
 }
@@ -283,28 +294,27 @@ body {
 
 
 input[type="range"] {
-  -webkit-appearance: none;
-  width: 70%;
-  background: transparent;
+    -webkit-appearance: none;
+    width: 70%;
+    background: transparent;
 
 }
 
-/* WebKit browsers (Chrome, Safari, Edge, Opera) */
 input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 30px;
-  width: 30px;
-  background: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/audiosliderfull.png') no-repeat center;
-  background-size: contain;
-  cursor: pointer;
-  margin-top: -10px; 
+    -webkit-appearance: none;
+    height: 30px;
+    width: 30px;
+    background: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/audiosliderfull.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    margin-top: -10px; 
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 10px;
-  background: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/audiobar.png') no-repeat center;
-  background-size: contain;
+    width: 100%;
+    height: 10px;
+    background: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/audiobar.png') no-repeat center;
+    background-size: contain;
 }
 input[type="range"]::-webkit-slider-thumb:hover {
     transform: scale(1.2);
@@ -320,4 +330,273 @@ input[type="range"]::-webkit-slider-thumb:hover {
     position:absolute;
     top: 77.8%;
     left: 20%;    
+}
+
+/* pearls and related */
+/* comments in css are buns but anyways i had to google how to do this fancy before after thing ok 😭😭 */
+.pearl {
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+    width: 3vw;
+    height: 3vw;
+
+}
+
+.pearl::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/pearlnocross.png');
+    width: 0.833vw; 
+    height: 0.833vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.pearl::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.833vw; 
+    height: 0.833vw;
+    background-color: var(--cross);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/pearlcross.png');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.category {
+    font-family: Runes;
+    font-size: 1.5vw;
+    cursor: pointer;    
+    user-select: none; 
+    width: 1.5vw;
+    height: 1.5vw;
+
+}
+
+.category:hover {
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+.pearl:hover {
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+
+#backcat {
+    position: absolute;
+    top: 2.19%;
+    left: 1%;
+}
+#backcat:hover {
+    filter: brightness(0) invert(1);
+}
+
+#backcat:hover #backcou{
+    transform: scale(1.45);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#backcat:hover #backcin{
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+
+/* add pearl menu */
+#addbutton {
+    position: absolute;
+
+}
+#addbutton:hover {
+    filter: brightness(0) invert(1);
+}
+#addbutton:hover #addou{
+    transform: scale(1.45);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#addbutton:hover #addin{
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+
+
+#selper {
+    top: 10%; 
+    right: var(--widthradial);
+    transform: scale(1.3);
+
+}
+#selcat {
+    top: 10%; 
+    left: var(--widthradial);
+    transform: scale(1.3);
+}
+#selper:hover{
+    filter: brightness(0) invert(1);
+    z-index: 4;
+}
+#selcat:hover{
+    filter: brightness(0) invert(1);
+    z-index: 4;
+
+}
+#pearlnameinput {
+    position: absolute;
+    top: 70.6%;
+    left: 44%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--idlemenu);
+    color: var(--text);
+    font-family: "textinput";
+    font-size: 1vw;
+    text-align: left;
+    outline: none;
+    caret-color: var(--text);
+}
+#nameinputlabel {
+    position: absolute;
+
+    top: 70%;
+    left: 28%;
+
+}
+
+#pearlnameinput::placeholder {
+    color: var(--idlemenu);
+    opacity: 0.5;
+}
+
+.colorinput {
+    position: absolute;
+    appearance: none;
+    width: 1.8vw;
+    height: 1.8vw;
+    border: 2px solid var(--idlemenu);
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+.colorinput::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.colorinput::-webkit-color-swatch {
+    border: none;
+}
+
+#pearlcolorinput {
+    position: absolute;
+
+    top: 38%;
+    left: 38%;
+    transform: translateX(-50%);
+}
+#pearllabel {
+    position: absolute;
+    left: 28%;
+    top: 40%;
+    transform: translateX(-50%);
+
+}
+#crosscolorinput {
+    position: absolute;
+    top: 48%;
+    left: 38%;
+    transform: translateX(-50%);
+}
+#crosslabel {
+    position: absolute;
+    top: 50%;
+    left: 28%;
+    transform: translateX(-50%);
+
+}
+
+
+#pearlimage {
+    position: absolute;
+    user-select: none;
+    top: 45%;
+    right: 38%
+
+}
+
+#pearlimage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/pearlnocross.png');
+    width: 5vw; 
+    height: 5vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+#pearlimage::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5vw; 
+    height: 5vw;
+    background-color: var(--cross);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/pearlcross.png');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+#addpearlborder {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    height: 70vh;
+    background-image: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectborder.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#catcolorinput {
+    position: absolute;
+
+    top: 45%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+}
+#categorylabel {
+    position: absolute;
+
+    top: 45%;
+    left: 28%;
+    transform: translate(-50%, -50%);
+}
+#categorypreview {
+    font-family: Runes;
+    font-size: 5vw;
+    user-select: none; 
+    position: absolute; 
+    width: 5vw;
+    height: 5vw;
+    top: 45%; 
+    right: 38%;
+    transform: translate(50%, -50%);
+    color:var(--color);
 }
