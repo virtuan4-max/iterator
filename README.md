@@ -1,9 +1,46 @@
 <p align="center"> 
   <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/logo.png" width="220" </img> 
 </p> 
-<h1 align="center">I T E R A T O R</h1> 
+<h1 align="center">I T E R A T O R</h1>
+<h2 align="center">--- The Rain-World themed alternative to OneNote ---</h2> 
 
-*note that the readme is serving useful links rn, currently planning layout and collecting assets and making a general plan*
+<h3>Overview</h3>
+
+Iterator is a hyper stylized, aesthetic focused notes app built around Rain World vibes. It doesn't just serve your notes to you in the same booooring, normal way of sterilized lists and columns and endless pages. Instead, your notes live inside pearls that orbit around the center rune. I honestly went all out on this project so I hope you enjoy loll : P  
+
+<h3>Key features </h3>
+
+- Infinite nesting: you can make categories and put pearls in those categories infinitely 
+- Orbiting pearls: pearls orbit around the center along with glyphs representing categories 
+- Beautiful theming: each theme, font, and icon is taken directly from or inspired by Rain World 
+- Music: Rain World music from in game plays in the background 
+- Locked pearls: you can lock pearls with a password to keep your notes secure 
+- Customization: Color, orbits, and tons of other settings can be changed 
+- HUMAN: this project isn't "AI slop" or whatever 
+
+<h3>Purpose</h3>
+
+Over the past year or so, I've been using OneNote to take all my notes on pretty much everything. While OneNote was an effective base for what I need, It lacked a few critical features:
+
+1. No ability to lock or put pages behind passwords
+2. No beautiful design (It is an eyesore by microslop) 
+3. No infinite nesting 
+4. Not a lot of customization 
+
+It is for these reasons that I developed my own version of OneNote, Iterator. 
+Oh, and not to mention that every beautiful, precise, pixel perfect UI, UX, and backend logic is HUMAN made. This is my first not almost completely AI codebase lmaoo. 
+
+<h3>Usage</h3>
+
+- Pearl and category creation: click the + button in the upper right hand side
+- Deleting/renaming: right click pearls or categories
+- Entering pearl/category: click one
+- Leaving a category: click the back button in the upper left hand corner
+- Editing text: highlight and right click it (inside the pearl text editor)
+
+*MANY FEATURES ARE IN DEVELOPMENT*
+
+*note that the readme is also serving useful links, currently planning layout and collecting assets and making a general plan*
 
 **Useful info**
 
