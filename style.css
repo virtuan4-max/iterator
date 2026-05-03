@@ -99,13 +99,20 @@ body {
     display: none;
 }
 
-#centerrings{
-    width: 20%;  
+#centerrings {
+    width: 20%;
+    aspect-ratio: 1;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: var(--accent);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/centerimage-noglyph.png');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
 }
+
 #centerglyph{
     position: absolute;
     text-align: center;
@@ -120,6 +127,18 @@ body {
     cursor: pointer;
 
 }
+
+#showupperlayer1 {
+    position: absolute;
+    top: 2.5%;
+    left: 10%;
+    font-size: 2vw; 
+    font-family: Runes; 
+    color: var(--accent);
+    pointer-events: none;
+    user-select: none;
+}
+
 /*buttons*/
 .circlebutton {
     position: absolute;
@@ -340,7 +359,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
     cursor: pointer;
     width: 3vw;
     height: 3vw;
-
 }
 
 .pearl::before {
@@ -379,8 +397,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
     font-size: 1.5vw;
     cursor: pointer;    
     user-select: none; 
-    width: 1.5vw;
-    height: 1.5vw;
+    width: 3vw;
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -593,10 +614,155 @@ input[type="range"]::-webkit-slider-thumb:hover {
     font-size: 5vw;
     user-select: none; 
     position: absolute; 
-    width: 5vw;
-    height: 5vw;
     top: 45%; 
-    right: 38%;
-    transform: translate(50%, -50%);
+    right: 16%;
+    transform: translate(-50%, -50%);
     color:var(--color);
+}
+
+/* edit pearls modal */
+#editpearlmodal {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+#editpearlborder {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 40vw;
+    height: 90vh;
+    background-image: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectborder.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#glyphtitle {
+    font-family: Runes;
+    font-size: 1.8vw;
+    user-select: none; 
+    position: absolute; 
+    top: 7.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:var(--color);
+    white-space: nowrap;
+}
+
+#glyphsubtitle {
+    font-family: Menu;
+    font-size: 1.4vw;
+    user-select: none; 
+    position: absolute; 
+    top: 14.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:var(--color);
+    white-space: nowrap;
+}
+#divider {
+    position: absolute;
+    top: 11.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    border-top: .3vw solid var(--idlemenu);
+}
+.texteditor {
+    position: absolute;
+    top: 52.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;    
+    height: 60%;
+    background: transparent;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: var(--text);
+    border: none;
+    font-family: "Menu";
+    font-size: .9vw;
+    padding: 4% 4%;
+    outline: none;
+    resize: none;
+    line-height: 1.3;
+    caret-color: var(--text);
+
+}
+
+.texteditor::-webkit-scrollbar {
+    width: 8px;
+}.texteditor::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+.texteditor::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 4px;
+}
+.texteditor::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+#pearlcontextmenu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    background-color: var(--bg);
+    border-color: var(--idlemenu);
+    border-radius: .5vw;
+    border: .2vw solid var(--idlemenu);
+    width: auto;
+    height: auto;
+    z-index: 999;
+    font-family: Menu;
+    font-size: 0.917vw;
+}
+
+#renameoption {
+    padding: 0.417vw 0.729vw;
+    color: var(--idlemenu);
+    cursor: pointer;
+    user-select: none;
+}
+
+#renameoption:hover {
+    color: white;
+}
+
+#deleteoption {
+    color: #910000;
+    padding: 0.417vw 0.729vw;
+    cursor: pointer;
+    user-select: none;
+}
+
+#deleteoption:hover {
+    color: #ff0000;
+}
+
+#textcontextmenu {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    background-color: var(--bg);
+    border-radius: .5vw;
+    border: .2vw solid var(--idlemenu);
+    width: auto;
+    height: auto;
+    z-index: 999;
+    font-family: Menu;
+    font-size: 0.917vw;
+}
+
+#textcontextmenu div {
+    padding: 0.417vw 0.729vw;
+    color: var(--idlemenu);
+    cursor: pointer;
+    user-select: none;
+}
+
+#textcontextmenu div:hover {
+    color: white;
 }
