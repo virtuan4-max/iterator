@@ -19,6 +19,7 @@ const intro = document.getElementById('intro');
 const introclick = document.getElementById('introclick');
 const settingsbutton = document.getElementById('settings');
 const introyncheck = document.getElementById('introyncheck');
+const centerglyph = document.getElementById('centerglyph');
 const audiotoggle = document.getElementById('audiotoggle');
 const musictoggle = document.getElementById('musictoggle');
 const backcategory = document.getElementById('backcat');
@@ -31,7 +32,14 @@ const nameinput = document.getElementById('pearlnameinput');
 const addbutton = document.getElementById('addbutton');
 const categoryimagecolor = document.getElementById('catcolorinput');
 const categorypreview = document.getElementById('categorypreview');
-
+const showuplayer1 = document.getElementById('showupperlayer1');
+const glyphtitle = document.getElementById('glyphtitle');
+const glyphsubtitle = document.getElementById('glyphsubtitle');
+const divider = document.getElementById('divider');
+const pearlcontextmenu = document.getElementById('pearlcontextmenu');
+const renameoption = document.getElementById('renameoption');
+const deleteoption = document.getElementById('deleteoption');
+const textcontextmenu = document.getElementById('textcontextmenu');
 
 
 // classes
@@ -40,25 +48,75 @@ const pearlmodal = document.querySelector('.addpearlmodal');
 const maincontent = document.querySelector('.maincontent');
 const selectedpearl = document.querySelector('.selectedpearl');
 const selectedcat = document.querySelector('.selectedcat');
+const editpearlmodal = document.querySelector('.editpearlmodal');
+const texteditor = document.querySelector('.texteditor');
 
 
 
-// events  for inputs
+
+// events  and inputs
 audiotoggle.addEventListener('input', updateVolume);
 musictoggle.addEventListener('input', updateVolume);
 nameinput.addEventListener('input', toggleaddbutton);
 pearlimagecolor.addEventListener('input', updatepearlimagecolors);
 crossimagecolor.addEventListener('input', updatepearlimagecolors);
 categoryimagecolor.addEventListener('input', updatepearlimagecolors);
+texteditor.addEventListener('input', () => {
+    if (!currentpearlid) return;
+    const pearl = findpearl(allpearls, currentpearlid);
+    if (!pearl) return;
+    pearl.content = texteditor.value;
+    localStorage.setItem('allpearls', JSON.stringify(allpearls));
+});
+document.addEventListener('contextmenu', (e) => {
+    const pearlclicked = e.target.closest('.pearl');
+    const categoryclicked = e.target.closest('.category');
 
+    if (pearlclicked || categoryclicked) {
+        e.preventDefault();
+        playhighclick();
+
+        contextid = pearlclicked ? pearlclicked.id : categoryclicked.id;
+        contexttype = pearlclicked ? "pearl" : "category";
+
+        pearlcontextmenu.style.display = 'flex';
+        pearlcontextmenu.style.left = e.clientX + window.scrollX + 'px';
+        pearlcontextmenu.style.top = e.clientY + window.scrollY + 'px';
+    } else {
+        pearlcontextmenu.style.display = 'none';
+    }
+    if (e.target.closest('#centerglyph')) {
+        e.preventDefault();
+        centerglyphemoji = prompt('set center glyph from emojis: 🌐😈🧓'); //ill probably fully add this eventually but im lazy
+        centerglyph.textContent = centerglyphemoji;
+    }
+});
+texteditor.addEventListener('contextmenu', function(e) {
+    const selectedtext = window.getSelection().toString();
+    if (selectedtext.length > 0) {
+        e.preventDefault();
+        textcontextmenu.style.display = 'flex';
+        textcontextmenu.style.left = e.clientX + 'px';
+        textcontextmenu.style.top = e.clientY + 'px';
+    }
+});
+
+document.addEventListener('mousedown', function(e) {
+    if (!textcontextmenu.contains(e.target)) {
+        textcontextmenu.style.display = 'none';
+    }
+});
 
 // display
 maincontent.style.display = 'none';
 settingsmodal.style.display = 'none';
 pearlmodal.style.display = "none";
+editpearlmodal.style.display = "none"
+
 backcategory.style.display = 'none';
 selectedpearl.style.display = "block"
 selectedcat.style.display = "none"
+
 
 
 // audiobars
@@ -74,9 +132,12 @@ let selectedadd = "pearl";
 let introPlayed = false;
 let allpearls = [];
 let layer = "top";
+let currentpearlid = null;
 let pearlcolor = pearlimagecolor.value;
 let pearlcross = crossimagecolor.value;
 let catglyph = categoryimagecolor.value;
+let contextid = null;
+let contexttype = null;
 
 //colors
 let accent = '#C40039';
@@ -95,6 +156,10 @@ if (introplay === null) {
 if (introplay === true) {
     introyncheck.style.display = 'block';
 }
+let centerglyphemoji = localStorage.getItem('centerglyphemoji')
+if (centerglyphemoji === null) {
+    centerglyphemoji = "🧓"
+}
 
 let audiovol = parseFloat(localStorage.getItem('audiovol'));
 if (isNaN(audiovol)) audiovol = 1;
@@ -107,6 +172,15 @@ if (isNaN(musicvol)) musicvol = 1;
 musictoggle.value = musicvol * 100;
 updateVolume()
 
+//localStorage.removeItem('allpearls');
+allpearls = JSON.parse(localStorage.getItem('allpearls'));
+if (allpearls === null) {
+    allpearls = [];
+    localStorage.setItem('allpearls', JSON.stringify(allpearls));
+}
+window.addEventListener('resize', () => {
+    divider.style.width = glyphtitle.getBoundingClientRect().width + "px";
+});
 //clicks for buttons
 document.addEventListener('click', (e) => {
     //pearls and related
@@ -115,23 +189,61 @@ document.addEventListener('click', (e) => {
         layer = categoryclicked.id
         updatepearls(layer);
     }
+    const pearlclicked = e.target.closest(".pearl")
+    if (pearlclicked) {
+        const pearl = findpearl(allpearls, pearlclicked.id);
+        currentpearlid = pearl.id;
+        maincontent.style.display = 'none';
+        editpearlmodal.style.display = 'block';
+        glyphtitle.style.setProperty('--color', pearl.color);
+        glyphtitle.textContent = pearl.name;
+        glyphsubtitle.style.setProperty('--color', '#FFFFFF');
+        glyphsubtitle.textContent = pearl.name;
+        divider.style.width = glyphtitle.getBoundingClientRect().width + "px";
+        texteditor.value = pearl.content ?? "";
+    }
     if (e.target.closest('#backcat')) {
         layer = getupperlayer(layer);
         updatepearls(layer);
     }
+    if (e.target.closest('#deleteoption')) {
+        if (contextid) {
+            deletepearl(contextid);
+            updatepearls(layer);
+            contextid = null;
+        }
+        pearlcontextmenu.style.display = 'none';
+    }
 
-    //buttons making clicky noises
-    if (e.target.closest('.circlebutton')) {
-        clickhigh.currentTime = 0;
-        clickhigh.play()
+    if (e.target.closest('#renameoption')) {
+        if (contextid) {
+            const item = contexttype === "pearl"
+                ? findpearl(allpearls, contextid)
+                : findcategory(allpearls, contextid);
+            if (item) {
+                const newname = prompt("Rename:", item.name);
+                if (newname && newname.trim() !== "") {
+                    item.name = newname.trim();
+                    localStorage.setItem('allpearls', JSON.stringify(allpearls));
+                    updatepearls(layer);
+                }
+            }
+        }
+        pearlcontextmenu.style.display = 'none';
+        contextid = null;
     }
-    if (e.target.closest('.rectbutton')) {
-        clickhigh.currentTime = 0;
-        clickhigh.play()
+
+    // lil menus
+    if (!e.target.closest('#pearlcontextmenu')) {
+        pearlcontextmenu.style.display = 'none';
     }
-    if(e.target.closest('.centerimage')) {
-        clickhigh.currentTime = 0;
-        clickhigh.play();         
+    if (!e.target.closest('#textcontextmenu')) {
+    textcontextmenu.style.display = 'none';
+}
+
+    //clicky noises
+    if(e.target.closest('.category') || e.target.closest('.pearl') || e.target.closest('.centerimage') || e.target.closest('.rectbutton') || e.target.closest('.circlebutton')) {
+        playhighclick();
     }
 
     //buttons being buttons
@@ -176,6 +288,8 @@ document.addEventListener('click', (e) => {
         maincontent.style.display = 'block';
         settingsmodal.style.display = 'none';
         pearlmodal.style.display = 'none';
+        editpearlmodal.style.display = 'none';
+
         setpearlactive();
         clearaddpearl();
 
@@ -313,7 +427,10 @@ function updateVolume() {
     });
 }
 
-
+function playhighclick() {
+    clickhigh.currentTime = 0;
+    clickhigh.play();  
+}
 //intro
 function entermaincontent() {
     intro.remove();
@@ -358,12 +475,22 @@ function introSequence() {
 }
 
 //pearls list
-function findcategory(list, name) {
+function findcategory(list, id) {
     for (const item of list) {
         if (item.type === "category") {
-            if (item.name === name) return item;
+            if (item.id === id) return item; 
 
-            const found = findcategory(item.children, name);
+            const found = findcategory(item.children, id);
+            if (found) return found;
+        }
+    }
+    return null;
+}
+function findpearl(list, id) {
+    for (const item of list) {
+        if (item.id === id) return item;
+        if (item.type === "category") {
+            const found = findpearl(item.children, id);
             if (found) return found;
         }
     }
@@ -373,6 +500,7 @@ function findcategory(list, name) {
 function addcategory(name, categoryname = null, color = accent) {
     const newcategory = {
         type: "category",
+        id: crypto.randomUUID(),
         name,
         color,
         children: []
@@ -380,6 +508,8 @@ function addcategory(name, categoryname = null, color = accent) {
 
     if (!categoryname || categoryname === 'top') {
         allpearls.push(newcategory);
+        localStorage.setItem('allpearls', JSON.stringify(allpearls));
+
         return;
     }
 
@@ -391,18 +521,23 @@ function addcategory(name, categoryname = null, color = accent) {
     }
 
     parent.children.push(newcategory);
+    localStorage.setItem('allpearls', JSON.stringify(allpearls));
 }
 
 function addpearl(name, categoryname = null, color = '#888', cross = '#fff') {
     const newpearl = {
         type: "pearl",
+        id: crypto.randomUUID(),
         name,
         color,
         cross,
+        content: "",
     };
 
     if (!categoryname || categoryname === 'top') {
         allpearls.push(newpearl);
+        localStorage.setItem('allpearls', JSON.stringify(allpearls));
+
         return;
     }
 
@@ -414,17 +549,17 @@ function addpearl(name, categoryname = null, color = '#888', cross = '#fff') {
     }
 
     category.children.push(newpearl);
-
+    localStorage.setItem('allpearls', JSON.stringify(allpearls));
 }
 
-function getupperlayer(layername) {
-    if (layername === "top") return "top";
+function getupperlayer(layerid) {
+    if (layerid === "top") return "top";
 
     function search(list, target, parent = null) {
         for (const item of list) {
             if (item.type === "category") {
-                if (item.name === target) {
-                    return parent ? parent.name : "top";
+                if (item.id === target) {
+                    return parent ? parent.id : "top";  // return id, not name
                 }
                 const result = search(item.children, target, item);
                 if (result !== null) return result;
@@ -433,22 +568,34 @@ function getupperlayer(layername) {
         return null;
     }
 
-    let parent = search(allpearls, layername);
-    if (parent === null) {
-        return "top";
-    } else {
-        return parent;
+    let parent = search(allpearls, layerid);
+    return parent === null ? "top" : parent;
+}
+function deletepearl(id) {
+    function removefromlist(list) {
+        const index = list.findIndex(item => item.id === id);
+        if (index !== -1) {
+            list.splice(index, 1);
+            return true;
+        }
+        for (const item of list) {
+            if (item.type === "category") {
+                if (removefromlist(item.children)) return true;
+            }
+        }
+        return false;
     }
+    removefromlist(allpearls);
+    localStorage.setItem('allpearls', JSON.stringify(allpearls));
 }
 
 
-
 // --- Orbiting pearls ---
-addcategory("rainworldpearls", null, '#fff')
-addpearl("spearmasterpearl", "rainworldpearls", '#15111a', '#b80000')
-addpearl("orange", "rainworldpearls", '#ff7a02', '#ffc776')
-addpearl("silver", "rainworldpearls", '#b2b2b2', '#e7e7e7')
-addpearl("black", "rainworldpearls", '#191919', '#727272')
+//addcategory("rainworldpearls", null, '#fff')
+//addpearl("spearmasterpearl", "rainworldpearls", '#15111a', '#b80000')
+//addpearl("orange", "rainworldpearls", '#ff7a02', '#ffc776')
+//addpearl("silver", "rainworldpearls", '#b2b2b2', '#e7e7e7')
+//addpearl("black", "rainworldpearls", '#191919', '#727272')
 
 //all this is in radians and i lwk prefer degrees but ig its not like that here lol
 //x = centerx + cos(angle) * radius
@@ -483,20 +630,20 @@ function renderpearls(pearlsforanimate) {
     if (pearl.type === "category") {
         div.classList.add("category");
         div.textContent = [...pearl.name].slice(0, 2).join('').toUpperCase();
-        div.id = pearl.name;
+        div.id = pearl.id;
         div.style.color = pearl.color;
 
     }
     if (pearl.type === "pearl") {
         div.classList.add("pearl");
-        div.id = pearl.name;
+        div.id = pearl.id;
         div.style.setProperty('--color', pearl.color);
         div.style.setProperty('--cross', pearl.cross);
 
     }
 
     maincontent.appendChild(div);
-    angles.set(pearl.name, (2 * Math.PI / pearlsforanimate.length) * i); 
+    angles.set(pearl.id, (2 * Math.PI / pearlsforanimate.length) * i); 
   });
 }
 
@@ -517,20 +664,59 @@ function animatepearls() {
         pearl.style.left = x + "px";
         pearl.style.top  = y + "px";
         pearl.style.transform = "translate(-50%, -50%)";
+        if (contextid && pearl.id === contextid && pearlcontextmenu.style.display === 'flex') {
+            const rect = pearl.getBoundingClientRect();
+            pearlcontextmenu.style.left = x + "px";
+            pearlcontextmenu.style.top = (y + rect.height / 2 ) + "px";
+        }
     });
 
     requestAnimationFrame(animatepearls);
 }
 
 function updatepearls(layer) {
+  
     if (layer === "top") {
-        backcategory.style.display = 'none'
+        backcategory.style.display = 'none';
+        document.documentElement.style.setProperty('--accent', accent);
+
+        centerglyph.textContent = centerglyphemoji;
+        centerglyph.style.color = accent;
+        centerrings.style.backgroundColor = accent;
+
+        showuplayer1.textContent = "";
+        showuplayer1.style.color = accent;
+
     } else {
-        backcategory.style.display = 'block'
-    };
-    let pearls = collectpearls(layer); 
+        backcategory.style.display = 'block';
+
+        const currentcat = findcategory(allpearls, layer);
+        const currentcolor = currentcat ? currentcat.color : accent;
+
+        document.documentElement.style.setProperty('--accent', currentcolor);
+
+        centerglyph.textContent = currentcat ? Array.from(currentcat.name)[0].toUpperCase(): "?";
+        centerglyph.style.color = currentcolor;
+        centerrings.style.backgroundColor = currentcolor;
+
+        let upper1 = getupperlayer(layer);
+
+        if (upper1 === "top") {
+            showuplayer1.textContent = centerglyphemoji;
+            showuplayer1.style.color = accent;
+        } else {
+            let upper1cat = findcategory(allpearls, upper1);
+
+            showuplayer1.textContent = upper1cat ? Array.from(upper1cat.name)[0].toUpperCase(): "?";
+            showuplayer1.style.color = upper1cat ? upper1cat.color: accent;
+        }
+    }
+
+    let pearls = collectpearls(layer);
     renderpearls(pearls);
 }
+
+
 
 
 
