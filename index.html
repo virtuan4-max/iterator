@@ -16,7 +16,7 @@
 
     <div class="maincontent">
         <div class="centerimage">
-            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/centerimage-noglyph.png" id="centerrings" draggable="false" ondragstart="return false;">
+            <div id="centerrings"></div>
             <span id="centerglyph" draggable="false" ondragstart="return false;">🧓</span>
         </div>
 
@@ -35,6 +35,7 @@
             <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backcin" draggable="false" ondragstart="return false;">
             <span class="buttonlabel" style="color: var(--idlemenu);">BACK</span>
         </button>
+        <span id="showupperlayer1">A</span>
     </div>
 
     <div class="settingsmodal" id="settingsborder" draggable="false" ondragstart="return false;">
@@ -75,7 +76,7 @@
             <span class="buttonlabel" style="color: var(--idlemenu);">CATEGORY</span>
         </button>           
 
-        <input type="text" id="pearlnameinput" placeholder="enter name" maxlength="30">   
+        <input type="text" id="pearlnameinput" placeholder="enter name" maxlength="15">   
         <span class="buttonlabel" id="nameinputlabel">NAME:</span>
 
         <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" style="position: absolute; top: 45%; right: 38%; width: 10vw; height: 10vw; transform: translate(50%, -50%)">
@@ -91,6 +92,32 @@
             <span class="buttonlabel" id="categorylabel">COLOR</span>
             <span id="categorypreview">D</span>                 
         </div>
+    </div>
+    <div class="editpearlmodal" id="editpearlborder" draggable="false" ondragstart="return false;">
+        <button class="rectbutton" id="back" style=" bottom: 4.5%; left: 3.5%;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel" style="color: var(--idlemenu);">BACK</span>
+        </button>
+        <span id="glyphtitle">Easter</span>
+        <span id="glyphsubtitle">Egg</span>
+        <div id="divider"></div>
+        <textarea class="texteditor" spellcheck="false" ></textarea>
+    </div>
+
+    <!-- all the context menus-->
+    <div id="pearlcontextmenu">
+        <div id="renameoption">Rename</div>
+        <div id="deleteoption">Delete</div>
+    </div>
+
+    <div id="textcontextmenu">
+        <div id="textopt-bold">Bold</div>
+        <div id="textopt-italic">Italic</div>
+        <div id="textopt-color">Color</div>
+        <div id="textopt-highlight">Highlight</div>
+        <div id="textopt-size">Size</div>
+        <div id="textopt-font">Font</div>
     </div>
 
     <script src="script.js"></script>
