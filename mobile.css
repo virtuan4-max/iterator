@@ -1,0 +1,963 @@
+@media (max-width: 700px) {
+
+/*==fonts==*/
+@font-face {
+    font-family: "Runes";
+    src: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/fonts/rain-world-alphabet.woff2") format("woff2");
+
+    ascent-override: 100%;
+    descent-override: 0%;
+    line-gap-override: 0%;
+    letter-spacing: -20px;
+
+}
+@font-face {
+    font-family: "Rodondo";
+    src: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/fonts/Rodondo.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Menu";
+    src: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/fonts/menu-font.woff2") format("woff2");
+    ascent-override: 70%;
+    descent-override: 0%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: "textinput";
+    src: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/fonts/menu-font.woff2") format("woff2");
+}
+
+/*animations*/
+@keyframes flash {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+}
+/*main ahh*/
+:root {
+    --accent: #C40039;
+    --bg:#000000;
+    --text:#FFFFFF;
+    --idlemenu:#A9A4B2;
+    --widthradial: 50%;
+    --delete: #910000;
+    --deletehover: #ff0000;
+}
+
+body {
+    height: 100dvh;
+    overflow: hidden;
+    background-color: var(--bg);
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/*intro*/
+#intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 1.6667vw;
+    user-select: none;
+    pointer-events: none;
+}
+#title {
+    font-family: "Runes";
+    font-size: clamp(2rem, 6vw, 5rem);
+    color: var(--accent);
+    text-align: center;
+    opacity: 0;
+}
+#subtitle {
+    font-family: "Menu";
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--text);
+    text-align: center;
+    opacity: 0;
+}
+#introclick {
+    position: absolute;
+    inset: 0;
+    margin: auto; 
+    width: fit-content;
+    height: fit-content;
+    width: 100%;
+    text-align: center;
+    font-family: "Menu";
+    color: var(--text);
+    opacity: 1;
+    transition: opacity 1s ease;
+    pointer-events: none;
+    user-select: none;
+
+}
+#introclick.fade {opacity: 0;}
+
+#skiptext {
+    position: fixed;
+    bottom: 4%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "Menu";
+    color: var(--idlemenu);
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+    user-select: none;
+    z-index: 999;
+}
+
+/*main content*/
+.maincontent {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    
+}
+
+#centerrings {
+    width: 65%;
+    aspect-ratio: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--accent);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/centerimage-noglyph.png');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+#centerglyph{
+    position: absolute;
+    text-align: center;
+    font-family: Runes;
+    color: var(--accent);
+    font-size: 26vw;  
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: -6.5vw;
+    user-select: none; 
+    cursor: pointer;
+
+}
+
+#showupperlayer1 {
+    position: absolute;
+    top: 2.5%;
+    left: 35%;
+    font-size: 8.5vw; 
+    font-family: Runes; 
+    color: var(--accent);
+    pointer-events: none;
+    user-select: none;
+}
+
+/*buttons*/
+.circlebutton {
+    position: absolute;
+    width: 10vw;
+    height: 10vw;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+}
+
+.outercircle {
+    width: 100%;
+    transition: transform 0.15s linear, filter 0.15s linear;
+    position: relative;
+}
+
+.innercircle {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;
+
+}
+.rectbutton {
+    position: absolute;
+    width: 29vw;
+    height: 9vw;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+}
+
+.outerrect {
+    width: 78%;
+    height: 100%;
+    transition: transform 0.15s linear, filter 0.15s linear;
+    position: relative;
+}
+
+.innerrect {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;
+
+}
+
+.buttonlabel {
+    font-family: "Menu";
+    color: var(--text);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    font-size: 3.5vw;
+}
+
+
+
+/*button positions*/
+#addpearl {
+    top: 2.19%;
+    right: 18%;
+}
+#settings {
+    top: 2.19%;
+    right: 5%;
+}
+
+/*this circlebutton was a nightmare to animate and center etc so appreciate it it does all the fancy animation stuff and like yeah but it looks good kinda😭✌️*/
+
+#plusbutton {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+#addpearl:hover #pearlou{
+    transform: scale(1.45);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#addpearl:hover #pearlin{
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+#addpearl:hover #plusbutton{
+    filter: brightness(0) invert(1);    
+}
+#gearbutton {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+#settings:hover #gearou{
+    transform: scale(1.45);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#settings:hover #gearin{
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+#settings:hover #gearbutton{
+    filter: brightness(0) invert(1);    
+}
+
+/*settings modal*/
+.rectbutton .buttonlabel {
+    color: var(--idlemenu);
+}
+
+#settingsborder #back {
+    bottom: 4.5%;
+    left: 35%;
+}
+#addpearlborder #back {
+    bottom: 4.5%;
+    left: 3.5%;
+}
+#editpearlborder #back {
+    bottom: 4.5%;
+    left: 35%;
+}
+
+#back {
+    position: absolute;
+
+}
+#back:hover {
+    filter: brightness(0) invert(1);
+}
+#back:hover #backou{
+    transform: scale(1.45);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#back:hover #backin{
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+#settingsborder {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height:  80vh;
+    background-image: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectborder.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#introyn {
+    position: absolute;
+    top: 10%;
+    left: 22.5%;
+}
+#introyn:hover #introynou{
+    transform: scale(1.45);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;    
+}
+#introyn:hover #introynin{
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    animation: flash 0.4s infinite;     
+}
+#introyncheck{
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+#introyn:hover #introyncheck{
+    filter: brightness(0) invert(1);
+    opacity: 1;  
+}
+
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 70%;
+    background: transparent;
+
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 30px;
+    width: 30px;
+    background: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/audiosliderfull.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    margin-top: -10px; 
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    background: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/audiobar.png') no-repeat center;
+    background-size: contain;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;    
+}
+#introynlabel {
+    top: 50%;
+    left: -80%;
+}
+#audiolabel {
+    top: 70.8%;
+    left: 12.8%;
+}
+#musiclabel {
+    top: 78.8%;
+    left: 12.8%;
+}
+#saveloadlabel {
+    top: 50%;
+    left: 17.5%;
+    align-content: left;
+}
+
+#audiotoggle {
+    position:absolute;
+    top: 69.8%;
+    left: 20%;
+}
+#musictoggle {
+    position:absolute;
+    top: 77.8%;
+    left: 20%;    
+}
+
+#importbutton {
+    position: absolute;
+    bottom: 38%;
+    left: 5%;
+}
+
+#exportbutton {
+    position: absolute;
+    bottom: 38%;
+    left: 37.5%;
+}
+
+#deleteallbutton {
+    position: absolute;
+    bottom: 38%;
+    left: 70%;
+    width: 20vw;
+    height: 9vw;
+    filter:brightness(0) saturate(100%)  invert(9%) sepia(75%) saturate(4893%) hue-rotate(355deg) brightness(100%) contrast(114%);
+
+}
+
+#importbutton:hover {
+    filter: brightness(0) invert(1);
+}
+#importbutton:hover #importou {
+    transform: scale(1.45);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#importbutton:hover #importin {
+    opacity: 1;
+    animation: flash 0.4s infinite;
+}
+
+#exportbutton:hover {
+    filter: brightness(0) invert(1);
+}
+#exportbutton:hover #exportou {
+    transform: scale(1.45);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#exportbutton:hover #exportin {
+    opacity: 1;
+    animation: flash 0.4s infinite;
+}
+
+#deleteallbutton:hover {
+    filter:brightness(0) saturate(100%) invert(11%) sepia(100%) saturate(7468%) hue-rotate(1deg) brightness(108%) contrast(107%);
+}
+#deleteallbutton:hover #deleteallou {
+    transform: scale(1.45);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#deleteallbutton:hover #deleteallin {
+    opacity: 1;
+    animation: flash 0.4s infinite;
+    width: 20vw;
+        height: 9vw;
+
+
+}
+/* pearls and related */
+/* comments in css are buns but anyways i had to google how to do this fancy before after thing ok 😭😭 */
+.pearl {
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+    width: 8vw;
+    height: 8vw;
+}
+
+.pearl::before {
+    content: "";
+    position: absolute;
+    background-color: var(--color);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/pearlnocross.png');
+    width: 3.332vw; 
+    height: 3.332vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.pearl::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3.332vw;
+    height: 3.332vw;
+    background-color: var(--cross);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/pearlcross.png');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.category {
+    font-family: Runes;
+    font-size: 6vw;
+    cursor: pointer;    
+    user-select: none; 
+    width: 12vw;
+    height: 12vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.category:hover {
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+.pearl:hover {
+    filter: brightness(0) invert(1);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+
+#backcat {
+    position: absolute;
+    top: 2.19%;
+    left: 2.5%;
+}
+#backcat:hover {
+    filter: brightness(0) invert(1);
+}
+
+#backcat:hover #backcou{
+    transform: scale(1.45);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#backcat:hover #backcin{
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+
+/* add pearl menu */
+#addbutton {
+    position: absolute;
+    bottom: 4.5%;
+    right: 3.5%;
+}
+#pearlpreviewframe {
+    position: absolute;
+    top: 45%;
+    right: 32%;
+    width:  25vw;
+    height: 25vw;
+    transform: translate(50%, -50%);
+}
+
+#addbutton:hover {
+    filter: brightness(0) invert(1);
+}
+#addbutton:hover #addou{
+    transform: scale(1.45);
+    transition: transform 0.08s ease-out, filter 0.08s ease-out;
+}
+#addbutton:hover #addin{
+    opacity: 1;
+    animation: flash 0.4s infinite; 
+}
+
+
+#selper {
+    top: 10%; 
+    right: var(--widthradial);
+    transform: scale(1.3);
+
+}
+#selcat {
+    top: 10%; 
+    left: var(--widthradial);
+    transform: scale(1.3);
+}
+#selper:hover{
+    filter: brightness(0) invert(1);
+    z-index: 4;
+}
+#selcat:hover{
+    filter: brightness(0) invert(1);
+    z-index: 4;
+
+}
+#pearlnameinput {
+    position: absolute;
+    top: 70.6%;
+    left: 57%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--idlemenu);
+    color: var(--text);
+    font-family: "textinput";
+    font-size: 4vw;
+    text-align: left;
+    outline: none;
+    caret-color: var(--text);
+}
+#nameinputlabel {
+    position: absolute;
+
+    top: 70%;
+    left: 28%;
+
+}
+
+#pearlnameinput::placeholder {
+    color: var(--idlemenu);
+    opacity: 0.5;
+}
+
+.colorinput {
+    position: absolute;
+    appearance: none;
+    width: 7vw;
+    height: 7vw;
+    border: 2px solid var(--idlemenu);
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+.colorinput::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.colorinput::-webkit-color-swatch {
+    border: none;
+}
+
+#pearlcolorinput {
+    position: absolute;
+
+    top: 38%;
+    left: 42%;
+    transform: translateX(-50%);
+}
+#pearllabel {
+    position: absolute;
+    left: 28%;
+    top: 40%;
+    transform: translateX(-50%);
+
+}
+#crosscolorinput {
+    position: absolute;
+    top: 48%;
+    left: 42%;
+    transform: translateX(-50%);
+}
+#crosslabel {
+    position: absolute;
+    top: 50%;
+    left: 28%;
+    transform: translateX(-50%);
+
+}
+
+
+#pearlimage {
+    position: absolute;
+    user-select: none;
+    top: 45%;
+    right: 32%
+
+}
+
+#pearlimage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/pearlnocross.png');
+    width: 12vw; 
+    height: 12vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+#pearlimage::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12vw; 
+    height: 12vw;
+    background-color: var(--cross);
+    mask-image: url('https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/pearlcross.png');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+#addpearlborder {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 50vh;
+    background-image: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectborder.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#catcolorinput {
+    position: absolute;
+
+    top: 45%;
+    left: 42%;
+    transform: translate(-50%, -50%);
+}
+#categorylabel {
+    position: absolute;
+
+    top: 45%;
+    left: 28%;
+    transform: translate(-50%, -50%);
+}
+#categorypreview {
+    font-family: Runes;
+    font-size: 13vw;
+    user-select: none; 
+    position: absolute; 
+    top: 45%; 
+    right: 10.5%;
+    transform: translate(-50%, -50%);
+    color:var(--color);
+}
+
+/* edit pearls modal */
+#editpearlmodal {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+#editpearlborder {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 80vh;
+    background-image: url("https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectborder.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#glyphtitle {
+    font-family: Runes;
+    font-size: 7vw;
+    user-select: none; 
+    position: absolute; 
+    top: 7.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:var(--color);
+    white-space: nowrap;
+}
+
+#glyphsubtitle {
+    font-family: Menu;
+    font-size: 5.5vw;
+    user-select: none; 
+    position: absolute; 
+    top: 14.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:var(--color);
+    white-space: nowrap;
+}
+#divider {
+    position: absolute;
+    top: 11.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    border-top: .3vw solid var(--idlemenu);
+}
+.texteditor {
+    position: absolute;
+    top: 52.5%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;    
+    height: 60%;
+    background: transparent;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: var(--text);
+    border: none;
+    font-family: "Menu";
+    font-size: 3.5vw;
+    padding: 4% 4%;
+    outline: none;
+    resize: none;
+    line-height: 1.3;
+    caret-color: var(--text);
+
+}
+
+.texteditor::-webkit-scrollbar {
+    width: 8px;
+}.texteditor::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+.texteditor::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 4px;
+}
+.texteditor::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+#pearlcontextmenu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    background-color: var(--bg);
+    border-color: var(--idlemenu);
+    border-radius: 1.9vw;
+    border: 0.76vw solid var(--idlemenu);
+    width: auto;
+    height: auto;
+    z-index: 999;
+    font-family: Menu;
+    font-size: 3.5vw;
+}
+
+#renameoption {
+    padding: 1.6vw 2.79vw;
+    color: var(--idlemenu);
+    cursor: pointer;
+    user-select: none;
+}
+
+#renameoption:hover {
+    color: white;
+}
+
+#exportoption {
+    padding: 1.6vw 2.79vw;
+    color: var(--idlemenu);
+    cursor: pointer;
+    user-select: none;
+}
+
+#exportoption:hover {
+    color: white;
+}
+
+#deleteoption {
+    color: #910000;
+    padding: 1.6vw 2.79vw;
+    cursor: pointer;
+    user-select: none;
+}
+
+#deleteoption:hover {
+    color: #ff0000;
+}
+
+#textcontextmenu {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    background-color: var(--bg);
+    border-radius: 1.9vw;
+    border: 0.76vw solid var(--idlemenu);
+    width: auto;
+    height: auto;
+    z-index: 999;
+    font-family: Menu;
+    font-size: 3.5vw;
+}
+
+#textcontextmenu div {
+    padding: 1.6vw 2.79vw;
+    color: var(--idlemenu);
+    cursor: pointer;
+    user-select: none;
+}
+
+#textcontextmenu div:hover {
+    color: white;
+}
+
+#backgroundcontextmenu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    background-color: var(--bg);
+    border-radius: 1.9vw;
+    border: 0.76vw solid var(--idlemenu);
+    width: auto;
+    height: auto;
+    z-index: 999;
+    font-family: Menu;
+    font-size: 3.5vw;
+}
+
+#importpearloption {
+    padding: 1.6vw 2.79vw;
+    color: var(--idlemenu);
+    cursor: pointer;
+    user-select: none;
+}
+
+#importpearloption:hover {
+    color: white;
+}
+
+#addpearloption {
+    padding: 1.6vw 2.79vw;
+    color: var(--idlemenu);
+    cursor: pointer;
+    user-select: none;
+}
+
+#addpearloption:hover {
+    color: white;
+}
+
+#addcategoryoption {
+    padding: 1.6vw 2.79vw;
+    color: var(--idlemenu);
+    cursor: pointer;
+    user-select: none;
+}
+
+#addcategoryoption:hover {
+    color: white;
+}
+} /* end @media (max-width: 600px) */

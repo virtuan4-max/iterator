@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Iterator</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/favicon.ico">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+    <div id="introclick"> (click to begin) </div>
+    <div id="intro">
+        <div id="title">ITERATOR</div>
+        <div id="subtitle">Iterator</div>
+    </div>
+
+    <div class="maincontent">
+        <div class="centerimage">
+            <div id="centerrings"></div>
+            <span id="centerglyph" draggable="false" ondragstart="return false;">🧓</span>
+        </div>
+
+        <button class="circlebutton" id="addpearl">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="outercircle" id="pearlou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="innercircle" id="pearlin" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/+symbol.png" id="plusbutton" draggable="false" ondragstart="return false;">
+        </button>
+        <button class="circlebutton" id="settings">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="outercircle" id="gearou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="innercircle" id="gearin" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/gear.png" id="gearbutton">
+        </button>
+        <button class="rectbutton" id="backcat">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backcou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backcin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">BACK</span>
+        </button>
+        <span id="showupperlayer1">A</span>
+    </div>
+
+    <div class="settingsmodal" id="settingsborder" draggable="false" ondragstart="return false;">
+        <button class="rectbutton" id="back">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">BACK</span>
+        </button>
+        <button class="circlebutton" id="introyn">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="outercircle" id="introynou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" class="innercircle" id="introynin" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/check.png" id="introyncheck">
+            <span class="buttonlabel" id="introynlabel">INTRO?</span>
+        </button>
+        <input type="range" id="audiotoggle">
+        <input type="range" id="musictoggle">
+        <span class="buttonlabel" id="audiolabel">AUDIO</span>
+        <span class="buttonlabel" id="musiclabel">MUSIC</span>
+        <span class="buttonlabel" id="saveloadlabel">SAVE/LOAD</span>
+        <button class="rectbutton" id="importbutton">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="importou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="importin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">IMPORT</span>
+        </button>
+        <button class="rectbutton" id="exportbutton">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="exportou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="exportin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">EXPORT</span>
+        </button>
+        <button class="rectbutton" id="deleteallbutton">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="deleteallou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="deleteallin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">DELETE ALL</span>
+        </button>
+    </div>
+
+    <div class="addpearlmodal" id="addpearlborder" draggable="false" ondragstart="return false;">
+        <button class="rectbutton" id="back">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">BACK</span>
+        </button>
+        <button class="rectbutton" id="addbutton">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="addou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="addin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">ADD</span>
+        </button>
+        <button class="rectbutton" id="selper">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/recthalfrr.png" class="outerrect" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">PEARL</span>
+        </button>
+        <button class="rectbutton" id="selcat">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/recthalffr.png" class="outerrect" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">CATEGORY</span>
+        </button>
+
+        <input type="text" id="pearlnameinput" placeholder="enter name" maxlength="20">
+        <span class="buttonlabel" id="nameinputlabel">NAME:</span>
+
+        <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/selectboxsquare.png" id="pearlpreviewframe" draggable="false" ondragstart="return false;">
+        <div class="selectedpearl">
+            <input type="color" class="colorinput" id="pearlcolorinput" value="#929292">
+            <span class="buttonlabel" id="pearllabel">COLOR</span>
+            <input type="color" class="colorinput" id="crosscolorinput" value="#FFFFFF">
+            <span class="buttonlabel" id="crosslabel">CROSS</span>
+            <div id="pearlimage"></div>
+        </div>
+        <div class="selectedcat">
+            <input type="color" class="colorinput" id="catcolorinput" value="#C40039">
+            <span class="buttonlabel" id="categorylabel">COLOR</span>
+            <span id="categorypreview">D</span>
+        </div>
+    </div>
+
+    <div class="editpearlmodal" id="editpearlborder" draggable="false" ondragstart="return false;">
+        <button class="rectbutton" id="back">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbuttonactive.png" class="outerrect" id="backou" draggable="false" ondragstart="return false;">
+            <img src="https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/rectbutton.png" class="innerrect" id="backin" draggable="false" ondragstart="return false;">
+            <span class="buttonlabel">BACK</span>
+        </button>
+        <span id="glyphtitle">Easter</span>
+        <span id="glyphsubtitle">Egg</span>
+        <div id="divider"></div>
+        <textarea class="texteditor" spellcheck="false"></textarea>
+    </div>
+
+    <!-- all the context menus (first ever html comment btw😭)-->
+    <div id="pearlcontextmenu">
+        <div id="renameoption">Rename</div>
+        <div id="exportoption">Export</div>
+        <div id="deleteoption">Delete</div>
+    </div>
+
+    <div id="backgroundcontextmenu">
+        <div id="importpearloption">Import</div>
+        <div id="addpearloption">Add Pearl</div>
+        <div id="addcategoryoption">Add Category</div>
+    </div>
+
+    <div id="textcontextmenu">
+        <div id="textopt-bold">Bold</div>
+        <div id="textopt-italic">Italic</div>
+        <div id="textopt-color">Color</div>
+        <div id="textopt-highlight">Highlight</div>
+        <div id="textopt-size">Size</div>
+        <div id="textopt-font">Font</div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // sw for app
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("./sw.js")
+                .then((registration) => {
+                    registration.update();
+                    console.log("Service Worker registered and update requested.");
+                })
+                .catch((error) => {
+                    console.error("Service Worker registration failed:", error);
+                });
+
+            
+        }
+    </script>
+</body>
+</html>

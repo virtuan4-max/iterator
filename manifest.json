@@ -1,0 +1,19 @@
+{
+  "id": "/index.html",
+  "name": "Iterator",
+  "short_name": "Iterator",
+  "description": "Iterator, a rain-world inspired notes app where notes orbit as pearls",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"],
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
