@@ -13,6 +13,12 @@
       "src": "https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/logo.png",
       "sizes": "512x512",
       "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn.jsdelivr.net/gh/virtuan4-max/iterator@main/assets/images/mask_logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable"
     }
   ]
