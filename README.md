@@ -36,8 +36,10 @@ Iterator now supports **mobile** and computers! You can now install it as a PWA 
 
 <h3>Usage</h3>
 
+*note that on mobile, right-click by holding)*
+
 - Pearl and category creation: click the + button in the upper right hand side
-- Deleting/renaming: right click pearls or categories
+- Deleting/renaming: right-click pearls/categories
 - Entering pearl/category: click one
 - Leaving a category: click the back button in the upper left hand corner
 - Editing text: highlight and right click it (inside the pearl text editor)
