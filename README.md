@@ -30,6 +30,10 @@ Over the past year or so, I've been using OneNote to take all my notes on pretty
 It is for these reasons that I developed my own version of OneNote, Iterator. 
 Oh, and not to mention that every beautiful, precise, pixel perfect UI, UX, and backend logic is HUMAN made. This is my first not almost completely AI codebase lmaoo. 
 
+<h3>Instalation</h3>
+
+Iterator now supports **mobile** and computers! You can now install it as a PWA (progressive web app). It will work online and offline, and the website/app will comunicate with eachother. To install, go to <a href="https://iteratornotes.github.io/" target="_blank" rel="noopener">iteratornotes.github.io/</a> specific instalation differs from device/browser so you may have to search it up, but there is typically a prompt/symbol to install when you visit or in the search bar.
+
 <h3>Usage</h3>
 
 - Pearl and category creation: click the + button in the upper right hand side
